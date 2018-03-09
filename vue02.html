@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<head>
+</head>
+<body>
+	<div id="app">
+		<!-- vue需要使用兩個大括弧 -->
+  		<p>Message:{{message}}</p>
+  		<!-- 使用v-once 不會更改 -->
+  		<p v-once>Message:{{message}}</p>
+  		<!-- 如果要呈現html語法，使用v-html -->
+  		<p v-html="message_html"></p>
+  		<!-- 顯示 -->
+  		<p v-if="seen">you can see me</p>
+
+  		<!-- 使用了lodash 跟 axios  -->
+ 		<p>Ask a yes/no question: <input v-model="question"></p>
+ 		<p>your question is {{question}}</p>
+  	<p>{{ answer }}</p>
+  	<p>{{ city }}</p>
+
+    
+
+	</div>
+
+  <div id="example">
+    <my-component></my-component>
+    <button @click="toggle()" > {{btnType}} </button>
+  </div>
+  
+</body>
+
+<script type="text/javascript">
+
+
+
+var app = new Vue({
+ 	el: '#app',
+ 	data: {
+   		message: 'Hello Vue!', 
+   		message_html: "<span style=\"color:red\">this is red </span>",
+   		seen: true,
+   		question:"empty",
+   		answer:"find your answer",
+   		city:"",
+      isActive:false,
+      isHover:false,
+      
+	},
+	watch:{
+		question:function(newQuestion,oldQuestion){
+			this.answer="waiting....";
+			this.getanswer();
+		}
+	},
+	methods:{
+		getanswer:_.debounce(
+  		function(){
+  			this.answer="thinking...."
+  			var vm = this;
+  			axios.get('https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js').then(function (response) {
+          vm.answer = _.capitalize(response.data);
+        }).catch(function (error) {
+          vm.answer = 'Error! Could not reach the API. ' + error;
+        });
+
+      },1000
+		),
+    
+	},
+
+})
+
+
+</script>
+</html>
