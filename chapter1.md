@@ -1,3 +1,25 @@
-# First Chapter
+# JS特性
 
-GitBook allows you to organize your book into chapters, each chapter is stored in a separate file like this one.
+# JS是單執行緒，所以code前後非常重要
+
+**$\(document\).ready\(\)   頁面加載完成後才會執行**
+
+**$\(document\).ready\(function\(\){}\) 可以簡寫成  $\(function\(\){}\)  **
+
+**\( function\( \) {} \) \( \)  這個與上兩個沒有關係，還沒理解，只知道可自定義ＪＳ避免衝突**
+
+# 函數
+
+#### 只有函數宣告   會提升到最前面，其餘不會
+
+```
+function fn () 
+{
+// 函數內容 ...
+}
+```
+
+#### 
+
+
+

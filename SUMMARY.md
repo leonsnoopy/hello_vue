@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](README.md)
-* [First Chapter](chapter1.md)
-* [2](2.md)
+* [Vue與JS](README.md)
+* [JS特性](chapter1.md)
+* [JS函數](2.md)
 
